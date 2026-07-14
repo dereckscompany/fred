@@ -1,11 +1,22 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://dereckscompany.github.io/fred/404.html</loc></url>
 <url><loc>https://dereckscompany.github.io/fred/LICENSE-text.html</loc></url>
-<url><loc>https://dereckscompany.github.io/fred/articles/demo.html</loc></url>
-<url><loc>https://dereckscompany.github.io/fred/articles/index.html</loc></url>
 <url><loc>https://dereckscompany.github.io/fred/authors.html</loc></url>
 <url><loc>https://dereckscompany.github.io/fred/index.html</loc></url>
-<url><loc>https://dereckscompany.github.io/fred/reference/add.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/news/index.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FRED_MAX_ROWS_PER_PAGE.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FRED_OUTPUT_TYPE.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FRED_REALTIME_MAX.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FRED_REALTIME_MIN.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FRED_RPM.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/FredSeries.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/SEARCH_TYPE.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/SORT_ORDER.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/fred-package.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/fred_api_key.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/fred_base_url.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/fred_conditions.html</loc></url>
+<url><loc>https://dereckscompany.github.io/fred/reference/fred_shapes.html</loc></url>
 <url><loc>https://dereckscompany.github.io/fred/reference/index.html</loc></url>
 </urlset>
 

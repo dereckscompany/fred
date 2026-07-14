@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,10 +16,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/demo.html">Demonstrating fred</a></li>
-  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/dereckscompany/fred" aria-label="GitHub repository"><span class="fa fa-github"></span></a></li>
@@ -35,9 +31,9 @@
     </div>
 
     <div class="section level2">
-      <h2 id="r-functions">R Functions<a class="anchor" aria-label="anchor" href="#r-functions"></a></h2>
+      <h2 id="the-client">The client<a class="anchor" aria-label="anchor" href="#the-client"></a></h2>
 
-      <div class="section-desc"><p>Pure R functions</p></div>
+      <div class="section-desc"><p>The FRED / ALFRED R6 client — observations, vintages, metadata, search, releases.</p></div>
 
       <dl></dl></div><div class="section level2">
 
@@ -46,12 +42,108 @@
 
       <dl><dt>
 
-          <code><a href="add.html">add()</a></code>
+          <code><a href="FredSeries.html">FredSeries</a></code>
 
         </dt>
-        <dd>Add two numbers</dd>
+        <dd>FredSeries: the FRED / ALFRED economic-data client</dd>
+      </dl></div><div class="section level2">
+      <h2 id="configuration-and-vocabulary">Configuration and vocabulary<a class="anchor" aria-label="anchor" href="#configuration-and-vocabulary"></a></h2>
+
+      <div class="section-desc"><p>The URL getter, key reader, and the exported constants.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="fred_base_url.html">fred_base_url()</a></code>
+
+        </dt>
+        <dd>FRED / ALFRED API base URL</dd>
+
+        <dt>
+
+          <code><a href="fred_api_key.html">fred_api_key()</a></code>
+
+        </dt>
+        <dd>Read the FRED API key from the environment</dd>
+
+        <dt>
+
+          <code><a href="FRED_RPM.html">FRED_RPM</a></code>
+
+        </dt>
+        <dd>FRED free-tier request budget (requests per minute)</dd>
+
+        <dt>
+
+          <code><a href="FRED_MAX_ROWS_PER_PAGE.html">FRED_MAX_ROWS_PER_PAGE</a></code>
+
+        </dt>
+        <dd>Maximum observation rows per FRED response (the offset-page size)</dd>
+
+        <dt>
+
+          <code><a href="FRED_REALTIME_MIN.html">FRED_REALTIME_MIN</a></code>
+
+        </dt>
+        <dd>ALFRED earliest real-time-period sentinel</dd>
+
+        <dt>
+
+          <code><a href="FRED_REALTIME_MAX.html">FRED_REALTIME_MAX</a></code>
+
+        </dt>
+        <dd>ALFRED latest real-time-period sentinel</dd>
+
+        <dt>
+
+          <code><a href="FRED_OUTPUT_TYPE.html">FRED_OUTPUT_TYPE</a></code>
+
+        </dt>
+        <dd>FRED observations <code>output_type</code> vocabulary</dd>
+
+        <dt>
+
+          <code><a href="SORT_ORDER.html">SORT_ORDER</a></code>
+
+        </dt>
+        <dd>Sort-order vocabulary</dd>
+
+        <dt>
+
+          <code><a href="SEARCH_TYPE.html">SEARCH_TYPE</a></code>
+
+        </dt>
+        <dd>Series-search <code>search_type</code> vocabulary</dd>
+      </dl></div><div class="section level2">
+      <h2 id="conditions-and-shapes">Conditions and shapes<a class="anchor" aria-label="anchor" href="#conditions-and-shapes"></a></h2>
+
+      <div class="section-desc"><p>The typed condition family and the documented return shapes.</p></div>
+
+      <dl></dl></div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="fred_conditions.html">fred_conditions</a></code>
+
+        </dt>
+        <dd>Typed fred conditions</dd>
+
+        <dt>
+
+          <code><a href="fred_shapes.html">fred_shapes</a></code>
+
+        </dt>
+        <dd>fred return shapes</dd>
       </dl></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">

@@ -11,8 +11,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="API Wrapper to the FRED and ALFRED Federal Reserve Economic Data API">
-<meta name="description" content="R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.">
-<meta property="og:description" content="R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.">
+<meta name="description" content="R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (offset-paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.">
+<meta property="og:description" content="R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (offset-paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,12 +32,6 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/demo.html">Demonstrating fred</a></li>
-  </ul>
-</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -51,8 +45,146 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="fred">fred<a class="anchor" aria-label="anchor" href="#fred"></a>
+</h1></div>
+<p>R API wrapper to the St. Louis Fed’s <strong>FRED</strong> and <strong>ALFRED</strong> economic-data API, supporting both synchronous and asynchronous (promise-based) operations, built on the shared <a href="https://github.com/dereckscompany/connectcore" class="external-link">connectcore</a> transport base.</p>
+<div class="section level2">
+<h2 id="what-this-is">What this is<a class="anchor" aria-label="anchor" href="#what-this-is"></a>
+</h2>
+<p>FRED (Federal Reserve Economic Data) is the standard free source for US macro series — GDP, unemployment, money supply, financial-conditions indices, the dollar, Treasury yields, and hundreds of thousands more. This package returns those series as tidy <code>data.table</code>s, synchronously or asynchronously, with typed columns and typed errors.</p>
+<p>Its reason to exist alongside the excellent CRAN alternatives is one discipline they leave to you: <strong>vintages as a first-class, typed surface.</strong></p>
+</div>
+<div class="section level2">
+<h2 id="the-revision-trap-why-vintages-matter">The revision trap (why vintages matter)<a class="anchor" aria-label="anchor" href="#the-revision-trap-why-vintages-matter"></a>
+</h2>
+<p>FRED serves the <em>latest revised</em> value of every observation. Most macro series are revised long after first release — money supply, unemployment, and jobless claims restate their history when seasonal factors or population controls are re-estimated; a financial-conditions index revises its <em>entire</em> history every week. So the history FRED shows today is <strong>not</strong> the history anyone actually had in the past: it embeds numbers that did not exist then. Backtesting a strategy on it is look-ahead by construction — the model silently “knows” revisions that had not yet happened.</p>
+<p><strong>ALFRED</strong> (ArchivaL FRED) is the fix. It serves every value <em>as it was known at each point in time</em>. This package makes that as-known-then surface a headline method (<code>get_series_vintages()</code>), typed and tested, so a point-in-time backtest can be honest.</p>
+</div>
+<div class="section level2">
+<h2 id="design-philosophy">Design philosophy<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
+</h2>
+<ul>
+<li>
+<strong><code>data.table</code> everywhere, no list columns.</strong> Every method returns one flat <code>data.table</code>; the observation value is typed nullable (FRED serves <code>.</code> for a missing observation, which becomes <code>NA</code>, never <code>0</code>), structural columns (ids, dates, real-time-window bounds) strict.</li>
+<li>
+<strong>Sync and async.</strong> Every request-making method works in both modes. <code>async = TRUE</code> returns a [promise][promises::promise]; otherwise the table is returned directly. There is a single sync/async branch point (inherited from <code>connectcore</code>), threaded even through the vintage pager.</li>
+<li>
+<strong>Vintage-first.</strong> <code>get_series()</code> exposes the real-time window directly (the latest values are simply today’s window); <code>get_series_vintages()</code> returns the whole as-known-then matrix, offset-paged so a ~900,000-row history streams back safely.</li>
+<li>
+<strong>Typed errors.</strong> Every failure is a classed condition (<code>fred_api_error</code>, <code>fred_validation_error</code>) carrying structured fields — you branch on the type, never grep the message. The API key is redacted from every stored URL.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>This project uses <a href="https://rstudio.github.io/renv/" class="external-link"><code>renv</code></a>. Add <code>fred</code> to your lockfile and restore:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"dereckscompany/fred"</span><span class="op">)</span></span>
+<span><span class="co"># or, without renv:</span></span>
+<span><span class="co"># remotes::install_github("dereckscompany/fred")</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="the-api-key">The API key<a class="anchor" aria-label="anchor" href="#the-api-key"></a>
+</h2>
+<p>Every FRED endpoint requires a free API key. Request one at <a href="https://fred.stlouisfed.org/docs/api/api_key.html" class="external-link uri">https://fred.stlouisfed.org/docs/api/api_key.html</a>, then store it in <code>.Renviron</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="va">FRED_API_KEY</span><span class="op">=</span><span class="st">"your-32-char-key"</span></span></code></pre></div>
+<p>FRED throttles at 120 requests/minute per key; pass <code>throttle_rate = 2</code> to the constructor to stay under it during rapid loops.</p>
+</div>
+<div class="section level2">
+<h2 id="latest-observations">Latest observations<a class="anchor" aria-label="anchor" href="#latest-observations"></a>
+</h2>
+<p>Omit the real-time window for the latest values (today’s window). The value column is nullable — FRED’s <code>.</code> sentinel (a market holiday here) becomes <code>NA</code>, never <code>0</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">client</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/FredSeries.html">FredSeries</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tips</span> <span class="op">&lt;-</span> <span class="va">client</span><span class="op">$</span><span class="fu">get_series</span><span class="op">(</span><span class="st">"DFII10"</span><span class="op">)</span></span>
+<span><span class="va">tips</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co">#&gt;    series_id       date value realtime_start realtime_end</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt;     &lt;Date&gt; &lt;num&gt;         &lt;Date&gt;       &lt;Date&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#&gt; 1:    DFII10 2024-01-02  2.05     2026-07-14   2026-07-14</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co">#&gt; 2:    DFII10 2024-01-03    NA     2026-07-14   2026-07-14</span></span></code></pre></div>
+<p><code>get_series()</code> also exposes <code>observation_start</code> / <code>observation_end</code> for a date range, <code>realtime_start</code> / <code>realtime_end</code> to ask what was known <em>then</em>, and FRED’s server-side <code>units</code> / <code>frequency</code> / <code>aggregation_method</code> transforms.</p>
+</div>
+<div class="section level2">
+<h2 id="as-known-then-vintages-the-headline">As-known-then vintages (the headline)<a class="anchor" aria-label="anchor" href="#as-known-then-vintages-the-headline"></a>
+</h2>
+<p><code>get_series_vintages()</code> returns the ALFRED long form: one row per (observation date, real-time window), each carrying the value that was current during that window. A row whose <code>realtime_end</code> is <code>"9999-12-31"</code> is still current.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">m2</span> <span class="op">&lt;-</span> <span class="va">client</span><span class="op">$</span><span class="fu">get_series_vintages</span><span class="op">(</span><span class="st">"M2SL"</span><span class="op">)</span></span>
+<span><span class="va">m2</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co">#&gt;    series_id       date value realtime_start realtime_end</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt;     &lt;Date&gt; &lt;num&gt;         &lt;Date&gt;       &lt;Date&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#&gt; 1:      M2SL 2024-01-01 20800     2024-02-27   2024-03-25</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co">#&gt; 2:      M2SL 2024-01-01 20850     2024-03-26   9999-12-31</span></span></code></pre></div>
+<p>Here one reference month (<code>2024-01-01</code>) has two rows: the initial <code>20800</code> (current 2024-02-27 through 2024-03-25) and the revised <code>20850</code> (current from 2024-03-26 onward). To reconstruct what was knowable on a date <code>d</code>, keep, for each observation, the row whose <code>[realtime_start, realtime_end]</code> window contains <code>d</code>. A whole-history matrix that exceeds FRED’s 100,000-row response cap is pulled in disjoint offset pages that stitch back to the un-paged whole with no seam clip, skip, or duplicate.</p>
+</div>
+<div class="section level2">
+<h2 id="metadata-and-search">Metadata and search<a class="anchor" aria-label="anchor" href="#metadata-and-search"></a>
+</h2>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="va">client</span><span class="op">$</span><span class="fu">get_series_info</span><span class="op">(</span><span class="st">"UNRATE"</span><span class="op">)</span></span>
+<span><span class="va">info</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">series_id</span>, <span class="va">title</span>, <span class="va">frequency</span>, <span class="va">units</span>, <span class="va">last_updated</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">hits</span> <span class="op">&lt;-</span> <span class="va">client</span><span class="op">$</span><span class="fu">search_series</span><span class="op">(</span><span class="st">"real gross domestic product"</span><span class="op">)</span></span>
+<span><span class="va">hits</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">series_id</span>, <span class="va">title</span>, <span class="va">popularity</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co">#&gt;    series_id             title frequency   units        last_updated</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt;            &lt;char&gt;    &lt;char&gt;  &lt;char&gt;              &lt;POSc&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#&gt; 1:    UNRATE Unemployment Rate   Monthly Percent 2026-07-03 12:48:03</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co">#&gt;    series_id                       title popularity</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co">#&gt;       &lt;char&gt;                      &lt;char&gt;      &lt;int&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co">#&gt; 1:     GDPC1 Real Gross Domestic Product         89</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co">#&gt; 2:       GDP      Gross Domestic Product         85</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="releases">Releases<a class="anchor" aria-label="anchor" href="#releases"></a>
+</h2>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">releases</span> <span class="op">&lt;-</span> <span class="va">client</span><span class="op">$</span><span class="fu">get_releases</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">releases</span><span class="op">[</span>, <span class="fu">.</span><span class="op">(</span><span class="va">release_id</span>, <span class="va">name</span>, <span class="va">press_release</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="va">client</span><span class="op">$</span><span class="fu">get_release_dates</span><span class="op">(</span><span class="fl">10L</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#&gt;    release_id                                                name press_release</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#&gt;         &lt;int&gt;                                              &lt;char&gt;        &lt;lgcl&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; 1:         10                                Consumer Price Index          TRUE</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co">#&gt; 2:         13 G.17 Industrial Production and Capacity Utilization          TRUE</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt;    release_id       date</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt;         &lt;int&gt;     &lt;Date&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a><span class="co">#&gt; 1:         10 2026-05-13</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a><span class="co">#&gt; 2:         10 2026-06-11</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a><span class="co">#&gt; 3:         10 2026-07-15</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="asynchronous-usage">Asynchronous usage<a class="anchor" aria-label="anchor" href="#asynchronous-usage"></a>
+</h2>
+<p>Set <code>async = TRUE</code> and consume the promise with <code><a href="https://coro.r-lib.org/reference/async.html" class="external-link">coro::async</a></code> / <code>await</code>, driving the event loop with <code>later</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">box</span><span class="fu">::</span><span class="fu"><a href="https://klmr.me/box/reference/use.html" class="external-link">use</a></span><span class="op">(</span><span class="va">coro</span>, <span class="va">later</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">client_async</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/FredSeries.html">FredSeries</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>async <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">main</span> <span class="op">&lt;-</span> <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/async.html" class="external-link">async</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">unrate</span> <span class="op">&lt;-</span> <span class="fu">await</span><span class="op">(</span><span class="va">client_async</span><span class="op">$</span><span class="fu">get_series</span><span class="op">(</span><span class="st">"UNRATE"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="va">nfci</span> <span class="op">&lt;-</span> <span class="fu">await</span><span class="op">(</span><span class="va">client_async</span><span class="op">$</span><span class="fu">get_series_vintages</span><span class="op">(</span><span class="st">"NFCI"</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>unrate <span class="op">=</span> <span class="va">unrate</span>, nfci <span class="op">=</span> <span class="va">nfci</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">main</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="kw">while</span> <span class="op">(</span><span class="op">!</span><span class="fu">later</span><span class="fu">::</span><span class="fu"><a href="https://later.r-lib.org/reference/loop_empty.html" class="external-link">loop_empty</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="fu">later</span><span class="fu">::</span><span class="fu"><a href="https://later.r-lib.org/reference/run_now.html" class="external-link">run_now</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="error-handling">Error handling<a class="anchor" aria-label="anchor" href="#error-handling"></a>
+</h2>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">result</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span></span>
+<span>    <span class="va">client</span><span class="op">$</span><span class="fu">get_series_vintages</span><span class="op">(</span><span class="st">"M2SL"</span>, realtime_start <span class="op">=</span> <span class="st">"2020-01-01"</span>, realtime_end <span class="op">=</span> <span class="st">"2010-01-01"</span><span class="op">)</span>,</span>
+<span>    fred_validation_error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"caught:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">conditionMessage</a></span><span class="op">(</span><span class="va">e</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">result</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; [1] "caught: `realtime_start` (2020-01-01) must be on or before `realtime_end` (2010-01-01)."</span></span></code></pre></div>
+<p>A FRED HTTP failure raises <code>fred_api_error_&lt;status&gt;</code> (nested into the fleet-wide <code>connectcore_api_error</code> chain) carrying <code>status</code>, FRED’s own <code>error_code</code>, and a key-redacted <code>url</code>.</p>
+</div>
+</div>
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
