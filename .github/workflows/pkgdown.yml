@@ -1,0 +1,54 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+#
+# renv is the package manager everywhere: dependencies come from
+# renv.lock via setup-renv (pkgdown included as a dev dependency).
+on:
+  push:
+    branches: [master, main]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+name: pkgdown
+
+permissions: read-all
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pkgdown:
+    runs-on: ubuntu-latest
+    env:
+      # renv::restore() below pulls PRIVATE org dependencies (e.g. tradebot-core);
+      # the default GITHUB_TOKEN is repo-scoped and cannot read them. RENV_GITHUB_PAT
+      # is an org secret (visibility: all repos) with cross-repo read access.
+      GITHUB_PAT: ${{ secrets.RENV_GITHUB_PAT }}
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-pandoc@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          # pinned to the renv.lock R version - see R-CMD-check.yaml note
+          r-version: '4.5.1'
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-renv@v2
+
+      - name: Build site
+        run: pkgdown::build_site_github_pages(new_process = FALSE, install = TRUE)
+        shell: Rscript {0}
+
+      - name: Deploy to GitHub pages
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          clean: false
+          branch: gh-pages
+          folder: docs

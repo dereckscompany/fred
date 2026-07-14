@@ -1,0 +1,29 @@
+# Blessed snake_case-only lint config. Now cruft-managed (out of cruft.skip.json)
+# so `cruft update` propagates it fleet-wide. Wrapper packages that still allow
+# camelCase (binance, kucoin - verbatim venue API params) keep .lintr in their
+# NOTE: this file must stay pure ASCII - lintr reads its DCF config in bytes
+# encoding and a single multibyte character breaks the parser.
+# own .cruft.json skip list until their snake_case migration PR lands, at which
+# point the camelCase allowance is dropped in the SAME PR as the renames.
+linters: linters_with_defaults(
+    line_length_linter = line_length_linter(120),
+    indentation_linter = indentation_linter(2),
+    object_name_linter = object_name_linter(styles = c("snake_case", "SNAKE_CASE", "CamelCase")),
+    # Functions accepted as a valid exit under return_style = "explicit".
+    # Add project-specific aborters here (e.g. abort_assertion).
+    return_linter = return_linter(return_style = "explicit", return_functions = c("abort", "cli_abort")),
+    # lintr's default 30 - long descriptive names are fine.
+    # (API-wrapper packages that mirror upstream field names sometimes set this
+    # to NULL entirely.)
+    object_length_linter = object_length_linter(length = 50L),
+    # Off: the house `# File:` header on every source file and the inline `code`
+    # spans in roxygen blocks are both false-flagged as commented-out code.
+    commented_code_linter = NULL
+  )
+exclusions: list(
+    "renv/activate.R",
+    "packages/*/renv/",
+    "scripts/",
+    # roxyassert writes this; never lint generated code.
+    "R/contracts-generated.R"
+  )

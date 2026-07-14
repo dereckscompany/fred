@@ -1,0 +1,32 @@
+Package: fred
+Title: API Wrapper to the FRED and ALFRED Federal Reserve Economic Data API
+Version: 0.0.0.9000
+URL: https://dereckscompany.github.io/fred,
+    https://github.com/dereckscompany/fred
+BugReports: https://github.com/dereckscompany/fred/issues
+Authors@R:
+    person(given = "Dereck",
+           family = "Mezquita",
+           role = c("aut", "cre"),
+           email = "dereck@mezquita.io",
+           comment = c(ORCID = "0000-0002-9307-6762"))
+Description: R API wrapper to the St. Louis Fed's FRED and ALFRED economic-data API supporting both synchronous and asynchronous (promise based) operations. Provides an R6 client for series observations, as-known-then ALFRED vintages (paged for large matrices), series metadata, search, and releases, built on the shared connectcore transport base with a vintage-first, point-in-time-honest discipline.
+License: MIT
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    box,
+    covr,
+    DT,
+    ggplot2,
+    knitr,
+    lintr,
+    microbenchmark,
+    pkgdown,
+    rcmdcheck,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+
