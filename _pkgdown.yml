@@ -5,7 +5,7 @@ template:
 
 navbar:
   structure:
-    left: [intro, reference, articles]
+    left: [reference]
     right: [search, github]
   components:
     github:
@@ -14,13 +14,24 @@ navbar:
       aria-label: GitHub repository
 
 reference:
-  - title: R Functions
-    desc: Pure R functions
+  - title: The client
+    desc: The FRED / ALFRED R6 client — observations, vintages, metadata, search, releases.
     contents:
-      - add
-
-articles:
-  - title: Getting Started
-    navbar: ~
+      - FredSeries
+  - title: Configuration and vocabulary
+    desc: The URL getter, key reader, and the exported constants.
     contents:
-      - demo
+      - fred_base_url
+      - fred_api_key
+      - FRED_RPM
+      - FRED_MAX_ROWS_PER_PAGE
+      - FRED_REALTIME_MIN
+      - FRED_REALTIME_MAX
+      - FRED_OUTPUT_TYPE
+      - SORT_ORDER
+      - SEARCH_TYPE
+  - title: Conditions and shapes
+    desc: The typed condition family and the documented return shapes.
+    contents:
+      - fred_conditions
+      - fred_shapes
