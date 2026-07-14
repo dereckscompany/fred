@@ -1,0 +1,47 @@
+{
+  "realtime_start": "2026-07-14",
+  "realtime_end": "2026-07-14",
+  "order_by": "search_rank",
+  "sort_order": "desc",
+  "count": 2,
+  "offset": 0,
+  "limit": 1000,
+  "seriess": [
+    {
+      "id": "GDPC1",
+      "realtime_start": "2026-07-14",
+      "realtime_end": "2026-07-14",
+      "title": "Real Gross Domestic Product",
+      "observation_start": "1947-01-01",
+      "observation_end": "2026-01-01",
+      "frequency": "Quarterly",
+      "frequency_short": "Q",
+      "units": "Billions of Chained 2017 Dollars",
+      "units_short": "Bil. of Chn. 2017 $",
+      "seasonal_adjustment": "Seasonally Adjusted Annual Rate",
+      "seasonal_adjustment_short": "SAAR",
+      "last_updated": "2026-06-26 07:52:01-05",
+      "popularity": 89,
+      "group_popularity": 89,
+      "notes": "Synthetic fixture. BEA Account Code: A191RX."
+    },
+    {
+      "id": "GDP",
+      "realtime_start": "2026-07-14",
+      "realtime_end": "2026-07-14",
+      "title": "Gross Domestic Product",
+      "observation_start": "1947-01-01",
+      "observation_end": "2026-01-01",
+      "frequency": "Quarterly",
+      "frequency_short": "Q",
+      "units": "Billions of Dollars",
+      "units_short": "Bil. of $",
+      "seasonal_adjustment": "Seasonally Adjusted Annual Rate",
+      "seasonal_adjustment_short": "SAAR",
+      "last_updated": "2026-06-26 07:52:02-05",
+      "popularity": 85,
+      "group_popularity": 89,
+      "notes": null
+    }
+  ]
+}

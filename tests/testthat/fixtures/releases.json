@@ -1,0 +1,28 @@
+{
+  "realtime_start": "2026-07-14",
+  "realtime_end": "2026-07-14",
+  "order_by": "release_id",
+  "sort_order": "asc",
+  "count": 2,
+  "offset": 0,
+  "limit": 1000,
+  "releases": [
+    {
+      "id": 10,
+      "realtime_start": "2026-07-14",
+      "realtime_end": "2026-07-14",
+      "name": "Consumer Price Index",
+      "press_release": true,
+      "link": "https://www.bls.gov/cpi/"
+    },
+    {
+      "id": 13,
+      "realtime_start": "2026-07-14",
+      "realtime_end": "2026-07-14",
+      "name": "G.17 Industrial Production and Capacity Utilization",
+      "press_release": true,
+      "link": "https://www.federalreserve.gov/releases/g17/",
+      "notes": "Synthetic fixture: monthly industrial production and capacity utilisation."
+    }
+  ]
+}
