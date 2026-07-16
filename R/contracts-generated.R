@@ -107,7 +107,7 @@ assert_args_FredSeries__get_series_info <- function(series_id, realtime_start, r
 
 assert_return_FredSeries__get_series_info <- function(value) {
   assert_data_table(value)
-  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
+  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "last_updated_raw", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
   assert_character(value[["series_id"]])
   assert_no_missing_values(value[["series_id"]])
   assert_character(value[["title"]])
@@ -129,6 +129,7 @@ assert_return_FredSeries__get_series_info <- function(value) {
   assert_character(value[["seasonal_adjustment_short"]])
   assert_no_missing_values(value[["seasonal_adjustment_short"]])
   assert_datetime(value[["last_updated"]])
+  assert_character(value[["last_updated_raw"]])
   assert_integer(value[["popularity"]])
   assert_integer(value[["group_popularity"]])
   assert_character(value[["notes"]])
@@ -162,7 +163,7 @@ assert_args_FredSeries__search_series <- function(search_text, search_type, limi
 
 assert_return_FredSeries__search_series <- function(value) {
   assert_data_table(value)
-  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
+  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "last_updated_raw", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
   assert_character(value[["series_id"]])
   assert_no_missing_values(value[["series_id"]])
   assert_character(value[["title"]])
@@ -184,6 +185,7 @@ assert_return_FredSeries__search_series <- function(value) {
   assert_character(value[["seasonal_adjustment_short"]])
   assert_no_missing_values(value[["seasonal_adjustment_short"]])
   assert_datetime(value[["last_updated"]])
+  assert_character(value[["last_updated_raw"]])
   assert_integer(value[["popularity"]])
   assert_integer(value[["group_popularity"]])
   assert_character(value[["notes"]])
@@ -317,7 +319,7 @@ assert_return_empty_dt_fred_vintages <- function(value) {
 
 assert_return_empty_dt_fred_series_info <- function(value) {
   assert_data_table(value)
-  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
+  assert_has_columns(value, c("series_id", "title", "observation_start", "observation_end", "frequency", "frequency_short", "units", "units_short", "seasonal_adjustment", "seasonal_adjustment_short", "last_updated", "last_updated_raw", "popularity", "group_popularity", "notes", "realtime_start", "realtime_end"))
   assert_character(value[["series_id"]])
   assert_no_missing_values(value[["series_id"]])
   assert_character(value[["title"]])
@@ -339,6 +341,7 @@ assert_return_empty_dt_fred_series_info <- function(value) {
   assert_character(value[["seasonal_adjustment_short"]])
   assert_no_missing_values(value[["seasonal_adjustment_short"]])
   assert_datetime(value[["last_updated"]])
+  assert_character(value[["last_updated_raw"]])
   assert_integer(value[["popularity"]])
   assert_integer(value[["group_popularity"]])
   assert_character(value[["notes"]])

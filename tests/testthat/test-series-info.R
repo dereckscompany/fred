@@ -14,6 +14,9 @@ test_that("get_series_info returns typed one-row metadata", {
   expect_s3_class(info$observation_start, "Date")
   expect_s3_class(info$last_updated, "POSIXct")
   expect_false(is.na(info$last_updated)) # the "-05" offset timestamp parses
+  # The faithful raw string sits alongside the parsed value, byte-for-byte as FRED sent it.
+  expect_type(info$last_updated_raw, "character")
+  expect_identical(info$last_updated_raw, "2026-07-03 07:48:03-05")
   expect_type(info$popularity, "integer")
   expect_true(is.na(info$group_popularity)) # the metadata endpoint omits it -> NA
 })
@@ -27,6 +30,9 @@ test_that("search_series returns many rows with group_popularity, and a null not
   expect_type(hits$group_popularity, "integer")
   expect_false(any(is.na(hits$group_popularity)))
   expect_true(is.na(hits$notes[hits$series_id == "GDP"])) # JSON null -> NA
+  # Every row carries FRED's raw last_updated string verbatim, alongside the parsed value.
+  expect_type(hits$last_updated_raw, "character")
+  expect_identical(hits$last_updated_raw[hits$series_id == "GDPC1"], "2026-06-26 07:52:01-05")
 })
 
 test_that("search_series rejects an unknown search_type before any request", {

@@ -54,6 +54,9 @@
 #' - seasonal_adjustment (character) the seasonal-adjustment description, e.g. "Not Seasonally Adjusted"; structural.
 #' - seasonal_adjustment_short (character) the short code, e.g. "NSA"; structural.
 #' - last_updated (POSIXct | NA) when FRED last updated the series (the release timestamp, in UTC); NA if unparseable.
+#' - last_updated_raw (character | NA) FRED's own last_updated string exactly as sent, e.g. "2026-07-03 07:48:03-05"
+#'   (a datetime carrying a UTC offset); the faithful source last_updated is parsed from, preserved verbatim so a
+#'   point-in-time archive keeps the venue's own representation; NA when FRED omits the field.
 #' - popularity (integer | NA) FRED's 0-100 popularity score; measurement.
 #' - group_popularity (integer | NA) the release-group popularity score; measurement; NA for the metadata endpoint
 #'   (only the search endpoint returns it).

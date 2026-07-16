@@ -15,6 +15,7 @@ test_that("empty constructors return zero-row, fully-typed tables", {
   info <- empty_dt_fred_series_info()
   expect_identical(nrow(info), 0L)
   expect_s3_class(info$last_updated, "POSIXct")
+  expect_type(info$last_updated_raw, "character")
   expect_s3_class(info$observation_start, "Date")
   expect_type(info$popularity, "integer")
 

@@ -1,6 +1,6 @@
 Package: fred
 Title: API Wrapper to the FRED and ALFRED Federal Reserve Economic Data API
-Version: 0.1.0
+Version: 0.2.0
 URL: https://dereckscompany.github.io/fred,
     https://github.com/dereckscompany/fred
 BugReports: https://github.com/dereckscompany/fred/issues
