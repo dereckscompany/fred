@@ -48,7 +48,12 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="fred">fred<a class="anchor" aria-label="anchor" href="#fred"></a>
 </h1></div>
+<p><strong>In plain terms:</strong> FRED is the St. Louis Federal Reserve’s free library of US economic data — things like unemployment, inflation, interest rates, and the size of the economy. There is a catch that trips up a lot of research: these numbers get quietly revised for months or years after they are first announced, so the history you download today is not the history anyone actually saw at the time. This package leans on FRED’s sister archive, ALFRED, to fetch each figure as it was originally known on any past date, so a study of history can be tested against what was genuinely knowable then instead of against corrected hindsight it could never have had. It returns everything as clean, typed tables in R, and treats that as-known-at-the-time view as a first-class feature rather than an afterthought.</p>
+<div class="section level2">
+<h2 id="technical-overview">Technical overview<a class="anchor" aria-label="anchor" href="#technical-overview"></a>
+</h2>
 <p>R API wrapper to the St. Louis Fed’s <strong>FRED</strong> and <strong>ALFRED</strong> economic-data API, supporting both synchronous and asynchronous (promise-based) operations, built on the shared <a href="https://github.com/dereckscompany/connectcore" class="external-link">connectcore</a> transport base.</p>
+</div>
 <div class="section level2">
 <h2 id="what-this-is">What this is<a class="anchor" aria-label="anchor" href="#what-this-is"></a>
 </h2>
