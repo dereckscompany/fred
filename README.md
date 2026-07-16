@@ -1,6 +1,21 @@
 
 # fred
 
+**In plain terms:** FRED is the St. Louis Federal Reserve’s free library
+of US economic data — things like unemployment, inflation, interest
+rates, and the size of the economy. There is a catch that trips up a lot
+of research: these numbers get quietly revised for months or years after
+they are first announced, so the history you download today is not the
+history anyone actually saw at the time. This package leans on FRED’s
+sister archive, ALFRED, to fetch each figure as it was originally known
+on any past date, so a study of history can be tested against what was
+genuinely knowable then instead of against corrected hindsight it could
+never have had. It returns everything as clean, typed tables in R, and
+treats that as-known-at-the-time view as a first-class feature rather
+than an afterthought.
+
+## Technical overview
+
 R API wrapper to the St. Louis Fed’s **FRED** and **ALFRED**
 economic-data API, supporting both synchronous and asynchronous
 (promise-based) operations, built on the shared
