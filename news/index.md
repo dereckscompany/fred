@@ -1,5 +1,29 @@
 # Changelog
 
+## fred 0.2.0
+
+CRAN release: 2026-04-11
+
+`get_series_info()` and `search_series()` now also carry FRED’s raw
+`last_updated` string alongside the parsed timestamp.
+
+In plain English: FRED reports when a series was last updated as a
+string like `"2026-07-03 07:48:03-05"` — a timestamp with a UTC offset
+baked in. The typed table has always parsed that into a clean UTC
+`POSIXct`, which is the right value for analysis but discards the
+exchange’s own wording. A point-in-time archive wants what FRED actually
+sent, verbatim, so this release adds the raw string as a new column
+beside the parsed one — the parsed value is unchanged, nothing is
+removed, and the archive can now keep the venue’s own representation.
+
+- `FredSeriesInfo` gains a `last_updated_raw` (character \| NA) column:
+  FRED’s `last_updated` field exactly as sent, preserved byte-for-byte.
+  It sits directly after the parsed `last_updated` (POSIXct \| NA),
+  which is unchanged and still parsed from the same string. Populated by
+  both `get_series_info()` and `search_series()` (they share the
+  seriess-element parser). Additive only — every existing column keeps
+  its name, type, and position.
+
 ## fred 0.1.0
 
 Initial release: the St. Louis Fed’s FRED and ALFRED economic data in

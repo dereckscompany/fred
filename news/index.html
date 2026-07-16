@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,9 +28,16 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/dereckscompany/fred/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/dereckscompany/fred/blob/v0.2.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="fred-020">fred 0.2.0<a class="anchor" aria-label="anchor" href="#fred-020"></a></h2><p class="text-muted">CRAN release: 2026-04-11</p>
+<p><code>get_series_info()</code> and <code>search_series()</code> now also carry FRED’s raw <code>last_updated</code> string alongside the parsed timestamp.</p>
+<p>In plain English: FRED reports when a series was last updated as a string like <code>"2026-07-03 07:48:03-05"</code> — a timestamp with a UTC offset baked in. The typed table has always parsed that into a clean UTC <code>POSIXct</code>, which is the right value for analysis but discards the exchange’s own wording. A point-in-time archive wants what FRED actually sent, verbatim, so this release adds the raw string as a new column beside the parsed one — the parsed value is unchanged, nothing is removed, and the archive can now keep the venue’s own representation.</p>
+<ul><li>
+<code>FredSeriesInfo</code> gains a <code>last_updated_raw</code> (character | NA) column: FRED’s <code>last_updated</code> field exactly as sent, preserved byte-for-byte. It sits directly after the parsed <code>last_updated</code> (POSIXct | NA), which is unchanged and still parsed from the same string. Populated by both <code>get_series_info()</code> and <code>search_series()</code> (they share the seriess-element parser). Additive only — every existing column keeps its name, type, and position.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="fred-010">fred 0.1.0<a class="anchor" aria-label="anchor" href="#fred-010"></a></h2>
 <p>Initial release: the St. Louis Fed’s FRED and ALFRED economic data in the fleet’s connector idiom, built vintage-first.</p>
@@ -42,7 +49,8 @@
 <li>Typed conditions from birth: <code>fred_api_error</code> layered in front of the <code>connectcore</code> transport chain (carrying <code>status</code>, FRED’s own body <code>error_code</code>, a key-redacted <code>url</code>, and a <code>body_snippet</code>); <code>fred_validation_error</code> under the <code>fred_error</code> domain root. A test proves the API key is redacted from every stored URL.</li>
 <li>Grounded against the live API’s error envelope (a real non-2xx status plus a JSON <code>{error_code, error_message}</code> body — a missing/invalid key is a plain HTTP 400, no HTML redirect to disentangle) and fully-synthetic mock fixtures offline. Live tests (<code>get_series</code>, vintages, metadata, search, releases) gate on <code>FRED_LIVE_TESTS</code> and a working key; every FRED endpoint needs a key, so there is no keyless surface.</li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
