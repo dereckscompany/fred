@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,7 +73,7 @@
 <li>
 <strong><code>data.table</code> everywhere, no list columns.</strong> Every method returns one flat <code>data.table</code>; the observation value is typed nullable (FRED serves <code>.</code> for a missing observation, which becomes <code>NA</code>, never <code>0</code>), structural columns (ids, dates, real-time-window bounds) strict.</li>
 <li>
-<strong>Sync and async.</strong> Every request-making method works in both modes. <code>async = TRUE</code> returns a [promise][promises::promise]; otherwise the table is returned directly. There is a single sync/async branch point (inherited from <code>connectcore</code>), threaded even through the vintage pager.</li>
+<strong>Sync and async.</strong> Every request-making method works in both modes. <code>async = TRUE</code> returns a <a href="https://rstudio.github.io/promises/" class="external-link">promise</a>; otherwise the table is returned directly. There is a single sync/async branch point (inherited from <code>connectcore</code>), threaded even through the vintage pager.</li>
 <li>
 <strong>Vintage-first.</strong> <code>get_series()</code> exposes the real-time window directly (the latest values are simply today’s window); <code>get_series_vintages()</code> returns the whole as-known-then matrix, offset-paged so a ~900,000-row history streams back safely.</li>
 <li>
