@@ -58,10 +58,11 @@ so a point-in-time backtest can be honest.
   serves `.` for a missing observation, which becomes `NA`, never `0`),
   structural columns (ids, dates, real-time-window bounds) strict.
 - **Sync and async.** Every request-making method works in both modes.
-  `async = TRUE` returns a \[promise\]\[promises::promise\]; otherwise
-  the table is returned directly. There is a single sync/async branch
-  point (inherited from `connectcore`), threaded even through the
-  vintage pager.
+  `async = TRUE` returns a
+  [promise](https://rstudio.github.io/promises/); otherwise the table is
+  returned directly. There is a single sync/async branch point
+  (inherited from `connectcore`), threaded even through the vintage
+  pager.
 - **Vintage-first.** `get_series()` exposes the real-time window
   directly (the latest values are simply today’s window);
   `get_series_vintages()` returns the whole as-known-then matrix,
