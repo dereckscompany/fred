@@ -51,7 +51,7 @@ FRED serves the *latest revised* value of every observation. Most macro series a
 ## Design philosophy
 
 - **`data.table` everywhere, no list columns.** Every method returns one flat `data.table`; the observation value is typed nullable (FRED serves `.` for a missing observation, which becomes `NA`, never `0`), structural columns (ids, dates, real-time-window bounds) strict.
-- **Sync and async.** Every request-making method works in both modes. `async = TRUE` returns a [promise][promises::promise]; otherwise the table is returned directly. There is a single sync/async branch point (inherited from `connectcore`), threaded even through the vintage pager.
+- **Sync and async.** Every request-making method works in both modes. `async = TRUE` returns a [promise](https://rstudio.github.io/promises/); otherwise the table is returned directly. There is a single sync/async branch point (inherited from `connectcore`), threaded even through the vintage pager.
 - **Vintage-first.** `get_series()` exposes the real-time window directly (the latest values are simply today's window); `get_series_vintages()` returns the whole as-known-then matrix, offset-paged so a ~900,000-row history streams back safely.
 - **Typed errors.** Every failure is a classed condition (`fred_api_error`, `fred_validation_error`) carrying structured fields — you branch on the type, never grep the message. The API key is redacted from every stored URL.
 
