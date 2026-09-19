@@ -1,16 +1,18 @@
 
 # fred
 
-FRED is the St. Louis Federal Reserve’s free library of US economic data
-— things like unemployment, inflation, interest rates, and the size of
-the economy. There is a catch that trips up a lot of research: these
-numbers get quietly revised for months or years after they are first
-announced, so the history you download today is not the history anyone
-actually saw at the time. This package leans on FRED’s sister archive,
-ALFRED, to fetch each figure as it was originally known on any past
-date, so a study of history can be tested against what was genuinely
-knowable then instead of against corrected hindsight it could never have
-had. It returns everything as clean, typed tables in R, and treats that
+**FRED is the St. Louis Federal Reserve’s free library of US economic
+data — things like unemployment, inflation, interest rates, and the size
+of the economy.**
+
+There is a catch that trips up a lot of research: these numbers get
+quietly revised for months or years after they are first announced, so
+the history you download today is not the history anyone actually saw at
+the time. This package leans on FRED’s sister archive, ALFRED, to fetch
+each figure as it was originally known on any past date, so a study of
+history can be tested against what was genuinely knowable then instead
+of against corrected hindsight it could never have had. It returns
+everything as clean, typed tables in R, and treats that
 as-known-at-the-time view as a first-class feature rather than an
 afterthought.
 
@@ -22,8 +24,6 @@ economic-data API, supporting both synchronous and asynchronous
 [connectcore](https://github.com/dereckscompany/connectcore) transport
 base.
 
-## What this is
-
 FRED (Federal Reserve Economic Data) is the standard free source for US
 macro series — GDP, unemployment, money supply, financial-conditions
 indices, the dollar, Treasury yields, and hundreds of thousands more.
@@ -34,7 +34,7 @@ Its reason to exist alongside the excellent CRAN alternatives is one
 discipline they leave to you: **vintages as a first-class, typed
 surface.**
 
-## The revision trap (why vintages matter)
+## Design philosophy
 
 FRED serves the *latest revised* value of every observation. Most macro
 series are revised long after first release — money supply,
@@ -50,8 +50,6 @@ had not yet happened.
 known at each point in time*. This package makes that as-known-then
 surface a headline method (`get_series_vintages()`), typed and tested,
 so a point-in-time backtest can be honest.
-
-## Design philosophy
 
 - **`data.table` everywhere, no list columns.** Every method returns one
   flat `data.table`; the observation value is typed nullable (FRED
@@ -83,7 +81,7 @@ renv::install("dereckscompany/fred")
 # remotes::install_github("dereckscompany/fred")
 ```
 
-## The API key
+## Quick start
 
 Every FRED endpoint requires a free API key. Request one at
 <https://fred.stlouisfed.org/docs/api/api_key.html>, then store it in
@@ -217,3 +215,20 @@ result
 A FRED HTTP failure raises `fred_api_error_<status>` (nested into the
 fleet-wide `connectcore_api_error` chain) carrying `status`, FRED’s own
 `error_code`, and a key-redacted `url`.
+
+## Documentation
+
+The rendered reference site is at
+<https://dereckscompany.github.io/fred>.
+
+Release history is in [`NEWS.md`](NEWS.md).
+
+## Citation
+
+Cite as: Mezquita, D. (2026). API Wrapper to the FRED and ALFRED Federal
+Reserve Economic Data API. R package version 0.2.3.
+<https://github.com/dereckscompany/fred>
+
+## Licence
+
+MIT
