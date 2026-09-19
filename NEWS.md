@@ -6,7 +6,7 @@ Earlier releases wrote the plain-English explanation as a labelled aside — "In
 
 - README.Rmd: removed the leading `**In plain terms:**` label from the package summary; the sentence it introduced is unchanged. Re-rendered README.md via `scripts/BUILD.sh readme`.
 - NEWS.md: removed the leading `In plain English:` label from the 0.2.1, 0.2.0, and 0.1.0 entries; each explanatory paragraph is unchanged apart from the capital letter now needed to start the sentence on its own.
-- 4 labels removed, 0 spellings changed, across 2 files (README.Rmd, NEWS.md); README.md regenerated as a build artefact of the README.Rmd change.
+- 4 labels removed, 0 spellings changed, across 2 files (README.Rmd, NEWS.md); README.md regenerated as a build artefact of the README.Rmd change; DESCRIPTION carries the version bump. Deliberately left alone: the "artifacts" wording in `scripts/BUILD.sh` and `scripts/CLEANUP.sh` (template-managed files, never edited inside a package), the `# Determine badge color` comment in the coverage workflow (it names the adjacent `color` variable and the shields.io field), and "labor force" inside a FRED series note in a test fixture (vendor text).
 
 # fred 0.2.1
 
