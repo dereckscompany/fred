@@ -8,7 +8,7 @@ This release does not change any code; it reshapes the README into the fleet's c
 - Merged `## The revision trap (why vintages matter)` into `## Design philosophy`: it explains the problem the vintage-first design solves, so it now opens that section as motivating prose ahead of the existing bullet list.
 - Bolded the opening sentence of the plain-English lead paragraph, per the fleet's two-level documentation shape; no other wording changed.
 - Added `## Documentation` (the pkgdown site and `NEWS.md`; the package ships no vignettes yet), `## Citation` (built from `DESCRIPTION`), and `## Licence` (MIT); none of these existed before.
-- No `## Quick start` section: the package has no unified quick-start example, and the first per-surface section (`## Latest observations`) already carries the client-construction example, matching the shape used by the other API-key connectors (census, deribit).
+- Renamed `## The API key` to `## Quick start`, wording unchanged.
 
 # fred 0.2.2
 

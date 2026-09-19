@@ -81,7 +81,7 @@ renv::install("dereckscompany/fred")
 # remotes::install_github("dereckscompany/fred")
 ```
 
-## The API key
+## Quick start
 
 Every FRED endpoint requires a free API key. Request one at
 <https://fred.stlouisfed.org/docs/api/api_key.html>, then store it in
