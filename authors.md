@@ -8,16 +8,16 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/dereckscompany/fred/blob/v0.2.1/inst/CITATION)
+[`inst/CITATION`](https://github.com/dereckscompany/fred/blob/master/inst/CITATION)
 
 Mezquita D (2026). *fred: API Wrapper to the FRED and ALFRED Federal
-Reserve Economic Data API*. R package version 0.2.1,
+Reserve Economic Data API*. R package version 0.2.2,
 <https://dereckscompany.github.io/fred>.
 
     @Manual{fred-2026,
       title = {fred: API Wrapper to the FRED and ALFRED Federal Reserve Economic Data API},
       author = {Dereck Mezquita},
       year = {2026},
-      note = {R package version 0.2.1},
+      note = {R package version 0.2.2},
       url = {https://dereckscompany.github.io/fred},
     }

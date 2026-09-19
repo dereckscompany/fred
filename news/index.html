@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,26 +28,34 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/dereckscompany/fred/blob/v0.2.1/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/dereckscompany/fred/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.2" id="fred-022">fred 0.2.2<a class="anchor" aria-label="anchor" href="#fred-022"></a></h2>
+<p>Tidy the prose in the README and NEWS: drop the leftover “In plain terms” / “In plain English” labels now that the plain-first sentence stands on its own.</p>
+<p>Earlier releases wrote the plain-English explanation as a labelled aside — “In plain terms: …” in the README, “In plain English: …” in three NEWS entries — a pattern the project has since moved away from in favour of just writing the plain sentence first, unlabelled, with the technical detail after it. This release strips those four labels without touching the sentences that followed them, and confirms (by re-grepping the whole package) that its prose already used British spelling throughout, so no spelling changes were needed.</p>
+<ul><li>README.Rmd: removed the leading <code>**In plain terms:**</code> label from the package summary; the sentence it introduced is unchanged. Re-rendered README.md via <code>scripts/BUILD.sh readme</code>.</li>
+<li>NEWS.md: removed the leading <code>In plain English:</code> label from the 0.2.1, 0.2.0, and 0.1.0 entries; each explanatory paragraph is unchanged apart from the capital letter now needed to start the sentence on its own.</li>
+<li>4 labels removed, 0 spellings changed, across 2 files (README.Rmd, NEWS.md); README.md regenerated as a build artefact of the README.Rmd change; DESCRIPTION carries the version bump. Deliberately left alone: the “artifacts” wording in <code>scripts/BUILD.sh</code> and <code>scripts/CLEANUP.sh</code> (template-managed files, never edited inside a package), the <code># Determine badge color</code> comment in the coverage workflow (it names the adjacent <code>color</code> variable and the shields.io field), and “labor force” inside a FRED series note in a test fixture (vendor text).</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.1" id="fred-021">fred 0.2.1<a class="anchor" aria-label="anchor" href="#fred-021"></a></h2>
 <p>Fix the rendered README: a cross-reference to the promises package was showing up as literal escaped brackets instead of a link.</p>
-<p>In plain English: the README described asynchronous calls using an R help-page cross-reference syntax that only resolves inside R’s own help viewer. GitHub does not understand that syntax, so the rendered README on GitHub showed the literal text “[promise][promises::promise]” instead of a working link. This release replaces it with a plain markdown link, matching the fix already shipped in the hyperliquid and polymarket connectors.</p>
+<p>The README described asynchronous calls using an R help-page cross-reference syntax that only resolves inside R’s own help viewer. GitHub does not understand that syntax, so the rendered README on GitHub showed the literal text “[promise][promises::promise]” instead of a working link. This release replaces it with a plain markdown link, matching the fix already shipped in the hyperliquid and polymarket connectors.</p>
 <ul><li>README.Rmd: replaced the Rd-style <code>[promise][promises::promise]</code> cross-reference with a plain markdown link to <a href="https://rstudio.github.io/promises/" class="external-link uri">https://rstudio.github.io/promises/</a>, and re-rendered README.md via <code>scripts/BUILD.sh readme</code>.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="fred-020">fred 0.2.0<a class="anchor" aria-label="anchor" href="#fred-020"></a></h2><p class="text-muted">CRAN release: 2026-04-11</p>
 <p><code>get_series_info()</code> and <code>search_series()</code> now also carry FRED’s raw <code>last_updated</code> string alongside the parsed timestamp.</p>
-<p>In plain English: FRED reports when a series was last updated as a string like <code>"2026-07-03 07:48:03-05"</code> — a timestamp with a UTC offset baked in. The typed table has always parsed that into a clean UTC <code>POSIXct</code>, which is the right value for analysis but discards the exchange’s own wording. A point-in-time archive wants what FRED actually sent, verbatim, so this release adds the raw string as a new column beside the parsed one — the parsed value is unchanged, nothing is removed, and the archive can now keep the venue’s own representation.</p>
+<p>FRED reports when a series was last updated as a string like <code>"2026-07-03 07:48:03-05"</code> — a timestamp with a UTC offset baked in. The typed table has always parsed that into a clean UTC <code>POSIXct</code>, which is the right value for analysis but discards the exchange’s own wording. A point-in-time archive wants what FRED actually sent, verbatim, so this release adds the raw string as a new column beside the parsed one — the parsed value is unchanged, nothing is removed, and the archive can now keep the venue’s own representation.</p>
 <ul><li>
 <code>FredSeriesInfo</code> gains a <code>last_updated_raw</code> (character | NA) column: FRED’s <code>last_updated</code> field exactly as sent, preserved byte-for-byte. It sits directly after the parsed <code>last_updated</code> (POSIXct | NA), which is unchanged and still parsed from the same string. Populated by both <code>get_series_info()</code> and <code>search_series()</code> (they share the seriess-element parser). Additive only — every existing column keeps its name, type, and position.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="fred-010">fred 0.1.0<a class="anchor" aria-label="anchor" href="#fred-010"></a></h2>
 <p>Initial release: the St. Louis Fed’s FRED and ALFRED economic data in the fleet’s connector idiom, built vintage-first.</p>
-<p>In plain English: this package fetches official US economic statistics — GDP, unemployment, money supply, financial-conditions indices, the dollar, Treasury yields — through one typed, tested interface that works both synchronously and asynchronously. Unlike the general-purpose alternatives, it treats <em>vintages</em> (what each number was known to be at each point in the past) as a first-class surface, so a backtest can use the numbers a trader actually had then rather than today’s revised history — the difference between an honest backtest and a look-ahead illusion.</p>
+<p>This package fetches official US economic statistics — GDP, unemployment, money supply, financial-conditions indices, the dollar, Treasury yields — through one typed, tested interface that works both synchronously and asynchronously. Unlike the general-purpose alternatives, it treats <em>vintages</em> (what each number was known to be at each point in the past) as a first-class surface, so a backtest can use the numbers a trader actually had then rather than today’s revised history — the difference between an honest backtest and a look-ahead illusion.</p>
 <ul><li>
 <code>FredSeries</code>: the client, over the shared <code>connectcore</code> transport, with sync + async threaded from the constructor. Methods: <code>get_series()</code> (observations at any real-time window — the latest values are simply today’s window, never a separate code path); <code>get_series_vintages()</code> (the headline — the ALFRED <code>output_type=1</code> as-known-then long form); <code>get_series_info()</code> (metadata, including the revision-cadence notes); <code>search_series()</code>; <code>get_releases()</code>; and <code>get_release_dates()</code>.</li>
 <li>Vintage-first, point-in-time honest. <code>get_series_vintages()</code> returns one row per (observation date, real-time window), each carrying the value current during that window; a <code>realtime_end</code> of <code>"9999-12-31"</code> means still current. The whole-history matrix of a heavily-revised series exceeds FRED’s 100,000-row response cap, so it is pulled in disjoint offset pages that stitch back to the un-paged whole with no seam clip, skip, or duplicate — the offset-pager logic proven live in the data-scraper’s src/fred collector (NFCI’s 906,899 rows reassemble byte-identical) is ported here into typed form, and its seam-stitching proof is a unit test.</li>
