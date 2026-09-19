@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,27 +48,20 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="fred">fred<a class="anchor" aria-label="anchor" href="#fred"></a>
 </h1></div>
-<p>FRED is the St. Louis Federal Reserve’s free library of US economic data — things like unemployment, inflation, interest rates, and the size of the economy. There is a catch that trips up a lot of research: these numbers get quietly revised for months or years after they are first announced, so the history you download today is not the history anyone actually saw at the time. This package leans on FRED’s sister archive, ALFRED, to fetch each figure as it was originally known on any past date, so a study of history can be tested against what was genuinely knowable then instead of against corrected hindsight it could never have had. It returns everything as clean, typed tables in R, and treats that as-known-at-the-time view as a first-class feature rather than an afterthought.</p>
+<p><strong>FRED is the St. Louis Federal Reserve’s free library of US economic data — things like unemployment, inflation, interest rates, and the size of the economy.</strong></p>
+<p>There is a catch that trips up a lot of research: these numbers get quietly revised for months or years after they are first announced, so the history you download today is not the history anyone actually saw at the time. This package leans on FRED’s sister archive, ALFRED, to fetch each figure as it was originally known on any past date, so a study of history can be tested against what was genuinely knowable then instead of against corrected hindsight it could never have had. It returns everything as clean, typed tables in R, and treats that as-known-at-the-time view as a first-class feature rather than an afterthought.</p>
 <div class="section level2">
 <h2 id="technical-overview">Technical overview<a class="anchor" aria-label="anchor" href="#technical-overview"></a>
 </h2>
 <p>R API wrapper to the St. Louis Fed’s <strong>FRED</strong> and <strong>ALFRED</strong> economic-data API, supporting both synchronous and asynchronous (promise-based) operations, built on the shared <a href="https://github.com/dereckscompany/connectcore" class="external-link">connectcore</a> transport base.</p>
-</div>
-<div class="section level2">
-<h2 id="what-this-is">What this is<a class="anchor" aria-label="anchor" href="#what-this-is"></a>
-</h2>
 <p>FRED (Federal Reserve Economic Data) is the standard free source for US macro series — GDP, unemployment, money supply, financial-conditions indices, the dollar, Treasury yields, and hundreds of thousands more. This package returns those series as tidy <code>data.table</code>s, synchronously or asynchronously, with typed columns and typed errors.</p>
 <p>Its reason to exist alongside the excellent CRAN alternatives is one discipline they leave to you: <strong>vintages as a first-class, typed surface.</strong></p>
 </div>
 <div class="section level2">
-<h2 id="the-revision-trap-why-vintages-matter">The revision trap (why vintages matter)<a class="anchor" aria-label="anchor" href="#the-revision-trap-why-vintages-matter"></a>
+<h2 id="design-philosophy">Design philosophy<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
 </h2>
 <p>FRED serves the <em>latest revised</em> value of every observation. Most macro series are revised long after first release — money supply, unemployment, and jobless claims restate their history when seasonal factors or population controls are re-estimated; a financial-conditions index revises its <em>entire</em> history every week. So the history FRED shows today is <strong>not</strong> the history anyone actually had in the past: it embeds numbers that did not exist then. Backtesting a strategy on it is look-ahead by construction — the model silently “knows” revisions that had not yet happened.</p>
 <p><strong>ALFRED</strong> (ArchivaL FRED) is the fix. It serves every value <em>as it was known at each point in time</em>. This package makes that as-known-then surface a headline method (<code>get_series_vintages()</code>), typed and tested, so a point-in-time backtest can be honest.</p>
-</div>
-<div class="section level2">
-<h2 id="design-philosophy">Design philosophy<a class="anchor" aria-label="anchor" href="#design-philosophy"></a>
-</h2>
 <ul>
 <li>
 <strong><code>data.table</code> everywhere, no list columns.</strong> Every method returns one flat <code>data.table</code>; the observation value is typed nullable (FRED serves <code>.</code> for a missing observation, which becomes <code>NA</code>, never <code>0</code>), structural columns (ids, dates, real-time-window bounds) strict.</li>
@@ -90,7 +83,7 @@
 <span><span class="co"># remotes::install_github("dereckscompany/fred")</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="the-api-key">The API key<a class="anchor" aria-label="anchor" href="#the-api-key"></a>
+<h2 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
 </h2>
 <p>Every FRED endpoint requires a free API key. Request one at <a href="https://fred.stlouisfed.org/docs/api/api_key.html" class="external-link uri">https://fred.stlouisfed.org/docs/api/api_key.html</a>, then store it in <code>.Renviron</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="va">FRED_API_KEY</span><span class="op">=</span><span class="st">"your-32-char-key"</span></span></code></pre></div>
@@ -188,6 +181,22 @@
 <span><span class="va">result</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co">#&gt; [1] "caught: `realtime_start` (2020-01-01) must be on or before `realtime_end` (2010-01-01)."</span></span></code></pre></div>
 <p>A FRED HTTP failure raises <code>fred_api_error_&lt;status&gt;</code> (nested into the fleet-wide <code>connectcore_api_error</code> chain) carrying <code>status</code>, FRED’s own <code>error_code</code>, and a key-redacted <code>url</code>.</p>
+</div>
+<div class="section level2">
+<h2 id="documentation">Documentation<a class="anchor" aria-label="anchor" href="#documentation"></a>
+</h2>
+<p>The rendered reference site is at <a href="https://dereckscompany.github.io/fred" class="uri">https://dereckscompany.github.io/fred</a>.</p>
+<p>Release history is in <a href="NEWS.html"><code>NEWS.md</code></a>.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>Cite as: Mezquita, D. (2026). API Wrapper to the FRED and ALFRED Federal Reserve Economic Data API. R package version 0.2.3. <a href="https://github.com/dereckscompany/fred" class="external-link uri">https://github.com/dereckscompany/fred</a></p>
+</div>
+<div class="section level2">
+<h2 id="licence">Licence<a class="anchor" aria-label="anchor" href="#licence"></a>
+</h2>
+<p>MIT</p>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

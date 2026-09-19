@@ -1,5 +1,33 @@
 # Changelog
 
+## fred 0.2.3
+
+**The README now follows the same shape as every other package in the
+fleet.**
+
+This release does not change any code; it reshapes the README into the
+fleet’s canonical structure so a reader used to one package’s
+documentation already knows where to look in this one. Two sections that
+explained background concepts have been folded into the sections whose
+design decisions they motivate, and three sections that name the
+rendered documentation site, how to cite the package, and its licence
+have been added, since every package README carries them and this one
+previously did not.
+
+- Merged `## What this is` into `## Technical overview`: both described
+  what the package is, so the second paragraph now continues directly
+  under the technical summary.
+- Merged `## The revision trap (why vintages matter)` into
+  `## Design philosophy`: it explains the problem the vintage-first
+  design solves, so it now opens that section as motivating prose ahead
+  of the existing bullet list.
+- Bolded the opening sentence of the plain-English lead paragraph, per
+  the fleet’s two-level documentation shape; no other wording changed.
+- Added `## Documentation` (the pkgdown site and `NEWS.md`; the package
+  ships no vignettes yet), `## Citation` (built from `DESCRIPTION`), and
+  `## Licence` (MIT); none of these existed before.
+- Renamed `## The API key` to `## Quick start`, wording unchanged.
+
 ## fred 0.2.2
 
 Tidy the prose in the README and NEWS: drop the leftover “In plain

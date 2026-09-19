@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fred</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,16 @@
       <small>Source: <a href="https://github.com/dereckscompany/fred/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.3" id="fred-023">fred 0.2.3<a class="anchor" aria-label="anchor" href="#fred-023"></a></h2>
+<p><strong>The README now follows the same shape as every other package in the fleet.</strong></p>
+<p>This release does not change any code; it reshapes the README into the fleet’s canonical structure so a reader used to one package’s documentation already knows where to look in this one. Two sections that explained background concepts have been folded into the sections whose design decisions they motivate, and three sections that name the rendered documentation site, how to cite the package, and its licence have been added, since every package README carries them and this one previously did not.</p>
+<ul><li>Merged <code>## What this is</code> into <code>## Technical overview</code>: both described what the package is, so the second paragraph now continues directly under the technical summary.</li>
+<li>Merged <code>## The revision trap (why vintages matter)</code> into <code>## Design philosophy</code>: it explains the problem the vintage-first design solves, so it now opens that section as motivating prose ahead of the existing bullet list.</li>
+<li>Bolded the opening sentence of the plain-English lead paragraph, per the fleet’s two-level documentation shape; no other wording changed.</li>
+<li>Added <code>## Documentation</code> (the pkgdown site and <code>NEWS.md</code>; the package ships no vignettes yet), <code>## Citation</code> (built from <code>DESCRIPTION</code>), and <code>## Licence</code> (MIT); none of these existed before.</li>
+<li>Renamed <code>## The API key</code> to <code>## Quick start</code>, wording unchanged.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.2" id="fred-022">fred 0.2.2<a class="anchor" aria-label="anchor" href="#fred-022"></a></h2>
 <p>Tidy the prose in the README and NEWS: drop the leftover “In plain terms” / “In plain English” labels now that the plain-first sentence stands on its own.</p>
